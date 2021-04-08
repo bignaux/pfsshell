@@ -46,8 +46,11 @@ jobs:
           meson setup build/
           meson compile -C build
 
+      - name: Install pfsshell
+        run: sudo meson install
+
       - name: Run Test
-        run: time ./run_test.tcl
+          time tclsh pfsshelltest.tcl
 
       - uses: actions/upload-artifact@master
         with:
