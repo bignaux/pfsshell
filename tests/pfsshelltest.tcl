@@ -14,8 +14,8 @@ set pfsshell "pfsshell"         ;# full path to pfsshell if some unusual place.
 
 test initialize { virtual disc initialize
 } -setup {
-	if [file exist "test.img" ] { file delete "test.img" }
-	exec fallocate -l 8G test.img
+	#if [file exist "test.img" ] { file delete "test.img" }
+	exec fallocate -l 1G test.img
 } -body {
 	pfsshell::init
  	pfsshell::pfsshell "device" "test.img" "-re" "(.*)# "
@@ -47,6 +47,9 @@ test fileManip { Test common file commands } -body {
 	pfsshell::pfsshell "cd" "directory" "-exact" "+OPL:/directory# "
 	pfsshell::pfsshell "put" "README.md" "-exact" "+OPL:/directory# "
 	pfsshell::pfsshell "rename" "README.md pfsshell.md" "-exact" "+OPL:/directory# "
+	pfsshell::pfsshell "rm" "pfsshell.md" "-exact" "+OPL:/directory# "
+	pfsshell::pfsshell "cd " ".." "-exact" "+OPL:/# "
+	pfsshell::pfsshell "rmdir " "directory" "-exact" "+OPL:/# "
 } -result 0
 
 test exitProperly { Close pfsshell } -body {
