@@ -34,11 +34,9 @@ jobs:
       - name: Build pfsshell
         run: |
           meson setup build/
-      #   meson compile -C build
           ninja -C build
 
       - name: Install pfsshell
-      # restore to meson install
         run: sudo ninja -C build install
 
       - name: Run Test
