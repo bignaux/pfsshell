@@ -1,5 +1,4 @@
-# -------------------------- future package pfsshell
-# we could also extend interactive mode with clever expect feature.
+# Author : Bignaux Ronan
 
 package require Expect
 package provide pfsshell 0.1
@@ -34,14 +33,15 @@ proc ::pfsshell::pfsshell { cmd {params ""} {arg "-re"} {expect "(.*)# "} } {
 	expect {
 		$arg $expect {
 			#send_user "\[\033\[01;32mpassed\033\[0m]"
+      return 0
 		}
 		timeout {
 			send_user "\[\033\[01;31mtimeout\033\[0m]"
-			return 1
+      return 1
 		}
 		-re "(.*)# " {
 			#send_user "\[\033\[01;31mfailed\033\[0m]"
-			return 1
+      return 0
 		}
 		#eof {
 		#	send_user "eof"

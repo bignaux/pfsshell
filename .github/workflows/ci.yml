@@ -50,7 +50,7 @@ jobs:
         run: sudo meson install
 
       - name: Run Test
-          time tclsh pfsshelltest.tcl
+        run: time tclsh tests/pfsshelltest.tcl
 
       - uses: actions/upload-artifact@master
         with:
